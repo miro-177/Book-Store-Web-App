@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to your static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://kit.fontawesome.com/19439c23c6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="title"><h1><a href="{{ url_for('admin') }}">Bookstore <i class="fa-solid fa-book-open"></i></a> </h1></div>
+        <div>
+            <form class="example" action="/search">
+                <select name="genre">
+                    <option value="">All Genres</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-fiction">Non-fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Classics">Classics</option>
+                    <option value="Young Adult">Young Adult</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Historical Fiction">Historical Fiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Memoir">Memoir</option>
+                    
+                    
+                </select>
+                <input type="text" placeholder="Search by Title, Author, Keyword, or ISBN" name="q">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="secondhalf" style="display: flex; justify-content: space-evenly; font-size:15px; width:400px">
+                <div><a href="{{ url_for('managebooks') }}">Manage Books</a></div>
+                <div><a href="{{ url_for('manageusers') }}">Manage Users</a></div>
+                <div><a href="{{ url_for('managepromotions') }}">Manage Promotions</a></div>
+        </div>
+    </div>
+    <div class="forgotpage">
+    <div class="image-container">
+        <img src="static/photos/bookstore.jpg" alt="Forgot Password Image" class="forgot-password-image">
+        <div class="overlay-text">Manage Users</div>
+    </div>
+    <br>
+    <div>
+        <form class="example">
+            <input type="text" placeholder="Search for a specific user" name="q">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+        <div class="userItem"> 
+            <p>Name</p>
+            <p>Email</p>
+            <p>Account status</p>
+        </div>
+    </div>
+</body>
+
+manage users

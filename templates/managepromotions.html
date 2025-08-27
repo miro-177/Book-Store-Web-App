@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to your static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://kit.fontawesome.com/19439c23c6.js" crossorigin="anonymous"></script>
+    <style>
+        .managebookscontainer {
+            display: flex;
+            flex-direction:row;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 100vw;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .managebookscontainer input{
+            width: 100%;
+            border-radius: 1px;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="container">
+        <div class="title"><h1><a href="{{ url_for('admin') }}">Bookstore <i class="fa-solid fa-book-open"></i></a> </h1></div>
+        <div>
+            <form class="example" action="/search">
+                <select name="genre">
+                    <option value="">All Genres</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-fiction">Non-fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Classics">Classics</option>
+                    <option value="Young Adult">Young Adult</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Historical Fiction">Historical Fiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Memoir">Memoir</option>
+                </select>
+                <input type="text" placeholder="Search by Title, Author, Keyword, or ISBN" name="q">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="secondhalf" style="display: flex; justify-content: space-evenly; font-size:15px; width:400px">
+                <div><a href="{{ url_for('managebooks') }}">Manage Books</a></div>
+                <div><a href="{{ url_for('manageusers') }}">Manage Users</a></div>
+                <div><a href="{{ url_for('managepromotions') }}">Manage Promotions</a></div>
+        </div>
+    </div>
+    <div class="forgotpage">
+    <div class="image-container">
+        <img src="static/photos/bookstore.jpg" alt="Forgot Password Image" class="forgot-password-image">
+        <div class="overlay-text">Create Promotions</div>
+    </div>
+
+    <div class="managebookscontainer">
+        <h2 style="margin-bottom: 20px;">Create new promotion</h2>
+        <form action="" method="POST" enctype="multipart/form-data" class="book-form" style="display: flex; flex-direction: column; gap: 15px; width: 100%;">
+            <label for="promo_code">Promo code</label>
+            <input type="text" id="promo_code" name="promo_code" required>
+
+            <label for="start_date">Start date</label>
+            <input type="date" id="start_date" name="start_date" required>
+
+            <label for="end_date">End date</label>
+            <input type="date" id="end_date" name="end_date" required>
+
+            <label for="discount_percentage">Price reduction percentage</label>
+            <input type="number" id="discount_percentage" name="discount_percentage" min="0" max="100" step="0.01" required>
+
+            <button class="signup-btn" type="submit">Create Promotion</button>
+        </form>
+    </div>
+</body>

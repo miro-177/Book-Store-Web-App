@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ book.title }} | Online Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/styles.css">
+    <script src="https://kit.fontawesome.com/19439c23c6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <div class="container">
+        <div class="title"><h1><a href="{{ url_for('homepage') }}">Bookstore <i class="fa-solid fa-book-open"></i></a></h1></div>
+        <div>
+            <form class="example" action="/search">
+                <select name="genre">
+                    <option value="">All Genres</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-fiction">Non-fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Classics">Classics</option>
+                    <option value="Young Adult">Young Adult</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Historical Fiction">Historical Fiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Memoir">Memoir</option>
+                </select>
+                <input type="text" placeholder="Search by Title, Author, Keyword, or ISBN" name="q">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="secondhalf">
+            {% if user_logged_in %}
+                <div><a href="{{ url_for('editprofile') }}"><i class="fa-solid fa-circle-user"></i></a></div>
+                <div><a href="{{ url_for('logout') }}" onclick="clearCartBeforeLogout()"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></div>
+                <div><i class="fa-solid fa-cart-shopping" onclick="openCart()"></i></div>
+            {% else %}
+                <div><a href="{{ url_for('login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></div>
+                <div><i class="fa-solid fa-cart-shopping" onclick="openCart()"></i></div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Book Display Section -->
+    <div class="bookdisplay">
+        <div class="book">
+            <img src="{{ url_for('static', filename='covers/' + book.isbn + '.jpg') }}"
+                 height="500"
+                 width="300"
+                 class="cover"
+                 alt="{{ book.title }}">
+        </div>
+        <div class="bookoverview">
+            <h1 class="booktitle">{{ book.title }}</h1>
+            <h2>By {{ book.author }}</h2>
+            <h3>${{ book.selling_price }}</h3>
+            <h1>OVERVIEW:</h1>
+            <p>{{ book.description }}</p>
+            <button
+                data-isbn="{{ book.isbn }}"
+                data-title="{{ book.title }}"
+                data-price="{{ book.selling_price }}"
+                onclick="addToCart(this)">
+                ADD TO CART
+            </button>
+        </div>
+    </div>
+
+    <!-- Cart Popup -->
+    <div id="cart-popout" class="cart-popout">
+        <div class="cart-header">
+            <span>Shopping Cart</span>
+            <i class="fa-solid fa-xmark cart-close" onclick="closeCart()"></i>
+        </div>
+        <div class="cart-body" id="cart-body">
+            <div class="cart-empty">
+                <i class="fa-solid fa-cart-shopping" style="font-size:3rem;margin-bottom:1rem;"></i>
+                <p>There are currently no items in your shopping cart.</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <button class="cart-btn" onclick="closeCart()">CONTINUE SHOPPING</button>
+            {% if user_logged_in %}
+                <button class="cart-btn-outline"><a href="{{ url_for('checkout') }}">CHECKOUT</a></button>
+                <button class="cart-btn-outline"><a href="{{ url_for('orderhistory') }}">Order History</a></button>
+            {% else %}
+                <button class="cart-btn-outline"><a href="{{ url_for('login') }}">SIGN IN</a></button>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        window.isLoggedIn = {{ 'true' if user_logged_in else 'false' }};
+    </script>
+    <script src="{{ url_for('static', filename='js/cart.js') }}"></script>
+</body>
+</html>

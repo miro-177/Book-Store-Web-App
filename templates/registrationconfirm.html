@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Bookstore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to your static CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <script src="https://kit.fontawesome.com/19439c23c6.js" crossorigin="anonymous"></script>
+
+    <style>
+    .center-container {
+        min-height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #f5f5f5;
+    }
+    .card {
+        background: #fff;
+        padding: 2rem 3rem;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+</style>
+
+</head>
+
+    <!-- Navbar -->
+    <div class="container">
+        <div class="title"><h1><a href="{{ url_for('homepage') }}">Bookstore <i class="fa-solid fa-book-open"></i></a> </h1></div>
+        <div>
+            <form class="example" action="/search">
+                <select name="genre">
+                    <option value="">All Genres</option>
+                    <option value="Fiction">Fiction</option>
+                    <option value="Non-fiction">Non-fiction</option>
+                    <option value="Fantasy">Fantasy</option>
+                    <option value="Classics">Classics</option>
+                    <option value="Young Adult">Young Adult</option>
+                    <option value="Dystopian">Dystopian</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Philosophy">Philosophy</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Biography">Biography</option>
+                    <option value="Historical Fiction">Historical Fiction</option>
+                    <option value="Science Fiction">Science Fiction</option>
+                    <option value="Memoir">Memoir</option>
+                    
+                    
+                </select>
+                <input type="text" placeholder="Search by Title, Author, Keyword, or ISBN" name="q">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        <div class="secondhalf">
+            {% if user_logged_in %}
+                <div><a href="{{ url_for('editprofile') }}"><i class="fa-solid fa-circle-user"></i></a></div>
+                <div><a href="{{ url_for('logout') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></div>
+                <div><i class="fa-solid fa-cart-shopping" onclick="openCart()"></i></div>
+            {% else %}
+                <div><a href="{{ url_for('login') }}"><i class="fa-solid fa-arrow-right-to-bracket"></i></a></div>
+                <div><i class="fa-solid fa-cart-shopping" onclick="openCart()"></i></div>
+            {% endif %}
+        </div>
+    </div>
+<body>
+    <div class="center-container">
+        <div class="card">
+            <div><i class="fa-regular fa-circle-check" style="color: #00ff08; font-size: 5rem;"></i></div>
+            <h1>Registration Successfully Completed!</h1>
+            <p>Thank you for registering! You can now <u><a href="{{ url_for('login') }}">log in</a></u> to your account.</p>
+        </div>
+    </div>
+</body>
+</html>
