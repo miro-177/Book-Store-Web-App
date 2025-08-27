@@ -2,13 +2,6 @@
 
 UI and backend for an online bookstore system using Flask and MySQL.
 
-## Deliverable by Team 8
-
-    - Swaraj Nistane
-    - Steven Tran
-    - James Breathnach
-    - Matthew Basil
-    - Miroslav Ostrovski
     
 ## Prerequisites
 
